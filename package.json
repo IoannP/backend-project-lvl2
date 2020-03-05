@@ -1,0 +1,41 @@
+{
+  "name": "get-difference",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build",
+    "gendiff": "npx babel-node src/bin/gendiff.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IoannP/frontend-project-lvl2.git"
+  },
+  "author": "Ioann Pilipchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IoannP/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/IoannP/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^4.1.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
+}
