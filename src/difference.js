@@ -1,4 +1,4 @@
-import getDiff from '..';
+import getDiff from './index';
 
 const path = require('path');
 const fs = require('fs');

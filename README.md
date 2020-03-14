@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/11beb9e9755904a71c26/maintainability)](https://codeclimate.com/github/IoannP/frontend-project-lvl2/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/11beb9e9755904a71c26/maintainability)](https://codeclimate.com/github/IoannP/frontend-project-lvl2/maintainability) ![Lint-test](https://github.com/IoannP/frontend-project-lvl2/workflows/Lint-test/badge.svg)
 
 # GENDIFF
 #### Compares two configuration files and shows a difference.
