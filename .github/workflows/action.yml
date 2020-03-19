@@ -17,8 +17,9 @@ jobs:
         run: make install
       - name: Running ESLint
         run: make lint
-      - name: Test & publish code coverage
+      - name: test coverage
+        uses: aktions/test-coverage@v1
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }};
+          codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: make test-coverage 
+          coverageCommand: make test-coverage
