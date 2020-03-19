@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander';
-import gendiff from '../difference';
+import genDiff from '../index';
 import { version, description } from '../../package.json';
 
 program
@@ -9,6 +9,7 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
-    console.log(gendiff(firstConfig, secondConfig));
+    const diff = genDiff(firstConfig, secondConfig);
+    console.log(diff);
   })
   .parse(process.argv);

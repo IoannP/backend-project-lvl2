@@ -1,18 +1,33 @@
 import _ from 'lodash';
 
-export default (fileOne, fileTwo) => {
-  const f1 = JSON.parse(fileOne);
-  const f2 = JSON.parse(fileTwo);
-  const keys = _.uniq([..._.keys(f1), ..._.keys(f2)]);
-  const getDiff = keys.reduce((acc, value) => {
-    if (_.has(f1, value) && _.has(f2, value)) {
-      if (f1[value] === f2[value]) return { ...acc, [`  ${value}`]: f2[value] };
-      return { ...acc, [`+ ${value}`]: f2[value], [`- ${value}`]: f1[value] };
+const path = require('path');
+const fs = require('fs');
+
+const compareData = (objOne, objTwo) => {
+  const keys = _.uniq([..._.keys(objOne), ..._.keys(objTwo)]);
+  return keys.reduce((acc, value) => {
+    if (_.has(objOne, value) && _.has(objTwo, value)) {
+      if (objOne[value] === objTwo[value]) return [...acc, `  ${value}: ${objTwo[value]}`];
+      return [...acc, `+ ${value}: ${objTwo[value]}`, `- ${value}: ${objOne[value]}`];
     }
-    if (_.has(f2, value)) {
-      return { ...acc, [`+ ${value}`]: f2[value] };
+    if (_.has(objTwo, value)) {
+      return [...acc, `+ ${value}: ${objTwo[value]}`];
     }
-    return { ...acc, [`- ${value}`]: f1[value] };
-  }, {});
-  return JSON.stringify(getDiff, null, ' ').replace(/['"]+/g, '');
+    return [...acc, `- ${value}: ${objOne[value]}`];
+  }, []);
+};
+
+const getData = (filePath) => {
+  let isAbsolute = filePath;
+  if (!path.isAbsolute(filePath)) isAbsolute = path.resolve(process.cwd(), filePath);
+
+  const readFile = fs.readFileSync(isAbsolute, 'utf8');
+  return JSON.parse(readFile);
+};
+
+export default (pathOne, pathTwo) => {
+  const obj1 = getData(pathOne);
+  const obj2 = getData(pathTwo);
+  const generatedDiff = compareData(obj1, obj2);
+  return `{\n${generatedDiff.join('\n')}\n}`;
 };
