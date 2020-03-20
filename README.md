@@ -7,7 +7,7 @@
 To compare files:
 * ```npx gendiff -h``` # to get help
 * ```npx gendiff -V``` # to get version
-* ```npx gendiff <first file> <second file>```  # to guess is even the number
+* ```npx gendiff <first file> <second file>```  # to get difference
 
 [![asciicast](https://asciinema.org/a/VWY7kuuCrywwJMogCq4OfYCaR.svg)](https://asciinema.org/a/VWY7kuuCrywwJMogCq4OfYCaR)
 
