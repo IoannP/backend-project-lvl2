@@ -9,5 +9,8 @@ To compare files:
 * ```npx gendiff -V``` # to get version
 * ```npx gendiff <first file> <second file>```  # to get difference
 
+##### JSON files
 [![asciicast](https://asciinema.org/a/VWY7kuuCrywwJMogCq4OfYCaR.svg)](https://asciinema.org/a/VWY7kuuCrywwJMogCq4OfYCaR)
 
+##### YML files
+[![asciicast](https://asciinema.org/a/SCYLzH2mCFAtuDIgn0zeH6tKa.svg)](https://asciinema.org/a/SCYLzH2mCFAtuDIgn0zeH6tKa)

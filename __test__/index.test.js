@@ -1,18 +1,22 @@
 import genDiff from '../src/index';
 
 const path = require('path');
+const fs = require('fs');
 
-const absolutePath1 = path.resolve(__dirname, '__fixtures__/before.json');
-const absolutePath2 = path.resolve(__dirname, '__fixtures__/after.json');
+const getAbsPath = (fileName) => path.join(__dirname, '../__fixtures__', fileName);
+const readFile = (fileName) => fs.readFileSync(getAbsPath(fileName), 'utf8');
+const result = readFile('expected.txt');
 
-test('paths', () => {
-  expect(genDiff('__test__/__fixtures__/before.json', '__test__/__fixtures__/after.json')).toEqual(genDiff(absolutePath1, absolutePath2));
-  expect(() => {
-    genDiff('__test__/__fixture__/before.json', '../src/index.js');
-  }).toThrow();
+test.each([['__fixtures__/before.json', '__fixtures__/after.json', result],
+  [getAbsPath('before.json'), '__fixtures__/after.json', result],
+  ['__fixtures__/before.yml', getAbsPath('after.yml'), result],
+  ['__fixtures__/before.yml', '__fixtures__/after.yml', result]])('generate difference between two files', (before, after, expected) => {
+  expect(genDiff(before, after)).toEqual(expected);
 });
 
-test('is contains', () => {
-  const expected = genDiff(absolutePath1, absolutePath2);
-  expect('+ died: 1963').toEqual(expect.not.stringContaining(expected));
+test('comparison must to throw', () => {
+  expect(() => {
+    genDiff(getAbsPath('before.json'), getAbsPath('index.json'));
+    genDiff('src/index.js', 'package.json');
+  }).toThrow();
 });

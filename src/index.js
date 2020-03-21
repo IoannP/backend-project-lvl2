@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import parse from './parsers';
 
 const path = require('path');
 const fs = require('fs');
@@ -18,16 +19,16 @@ const compareData = (objOne, objTwo) => {
 };
 
 const getData = (filePath) => {
-  let isAbsolute = filePath;
-  if (!path.isAbsolute(filePath)) isAbsolute = path.resolve(process.cwd(), filePath);
-
-  const readFile = fs.readFileSync(isAbsolute, 'utf8');
-  return JSON.parse(readFile);
+  let absPath = filePath;
+  if (!path.isAbsolute(filePath)) absPath = path.resolve(process.cwd(), filePath);
+  const getParse = parse(absPath);
+  const readFile = fs.readFileSync(absPath, 'utf8');
+  return getParse(readFile);
 };
 
 export default (pathOne, pathTwo) => {
   const obj1 = getData(pathOne);
   const obj2 = getData(pathTwo);
   const generatedDiff = compareData(obj1, obj2);
-  return `{\n${generatedDiff.join('\n')}\n}`;
+  return `{\n${generatedDiff.join('\n')}\n}\n`;
 };

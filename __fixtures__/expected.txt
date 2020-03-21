@@ -1,0 +1,14 @@
+{
++ name: William
+- name: John
++ surname: Clinton
+- surname: Kennedy
++ middle: Jefferson
+- middle: Fitzgerald
++ born: 1946
+- born: 1917
+- died: 1963
++ age: 73
+- age: 46
+  children: true
+}
