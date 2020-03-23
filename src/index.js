@@ -20,7 +20,7 @@ const compareData = (objOne, objTwo) => {
 
 const getData = (filePath) => {
   let absPath = filePath;
-  if (!path.isAbsolute(filePath)) absPath = path.resolve(process.cwd(), filePath);
+  if (!path.isAbsolute(filePath)) absPath = path.resolve(filePath);
   const getParse = parse(absPath);
   const readFile = fs.readFileSync(absPath, 'utf8');
   return getParse(readFile);

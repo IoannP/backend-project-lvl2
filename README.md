@@ -14,3 +14,6 @@ To compare files:
 
 ##### YML files
 [![asciicast](https://asciinema.org/a/SCYLzH2mCFAtuDIgn0zeH6tKa.svg)](https://asciinema.org/a/SCYLzH2mCFAtuDIgn0zeH6tKa)
+
+##### INI files
+[![asciicast](https://asciinema.org/a/TEKrEOBclQ51Sd8qUx3AypD3t.svg)](https://asciinema.org/a/TEKrEOBclQ51Sd8qUx3AypD3t)
