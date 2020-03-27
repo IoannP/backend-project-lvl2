@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import parse from './parsers';
 
-const path = require('path');
 const fs = require('fs');
 
 const compareData = (objOne, objTwo) => {
