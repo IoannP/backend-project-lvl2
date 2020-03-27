@@ -10,10 +10,10 @@ To compare files:
 * ```npx gendiff <first file> <second file>```  # to get difference
 
 ##### JSON files
-[![asciicast](https://asciinema.org/a/VWY7kuuCrywwJMogCq4OfYCaR.svg)](https://asciinema.org/a/VWY7kuuCrywwJMogCq4OfYCaR)
+[![asciicast](https://asciinema.org/a/sTUxuqox67gxL3mDWy7jc0TrT.svg)](https://asciinema.org/a/sTUxuqox67gxL3mDWy7jc0TrT)
 
 ##### YML files
-[![asciicast](https://asciinema.org/a/SCYLzH2mCFAtuDIgn0zeH6tKa.svg)](https://asciinema.org/a/SCYLzH2mCFAtuDIgn0zeH6tKa)
+[![asciicast](https://asciinema.org/a/RX5hU1dPYEAv16iCuh1WZF7P2.svg)](https://asciinema.org/a/RX5hU1dPYEAv16iCuh1WZF7P2)
 
 ##### INI files
-[![asciicast](https://asciinema.org/a/TEKrEOBclQ51Sd8qUx3AypD3t.svg)](https://asciinema.org/a/TEKrEOBclQ51Sd8qUx3AypD3t)
+[![asciicast](https://asciinema.org/a/cc7ueOcpIlLDXygzMINSYlYHZ.svg)](https://asciinema.org/a/cc7ueOcpIlLDXygzMINSYlYHZ)

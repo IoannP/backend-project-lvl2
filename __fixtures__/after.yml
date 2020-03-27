@@ -1,6 +1,25 @@
- name: William
- surname: Clinton
- middle: Jefferson
- born: 1946
- age: 73
- children: true
+---
+name: Caroline
+surname: Kennedy
+middle: Bouvier
+born: 1957
+age: 62
+children:
+  Rose:
+    name: Rose
+    surname: Schlossberg
+    middle: Kennedy
+    born: 1988
+    age: 31
+  Tatiana:
+    name: Tatiana
+    surname: Schlossberg
+    middle: Kennedy
+    born: 1990
+    age: 29
+  John:
+    name: John
+    surname: Schlossberg
+    middle: Bouvier Kennedy
+    born: 1993
+    age: 27

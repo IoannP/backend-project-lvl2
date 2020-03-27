@@ -4,17 +4,13 @@ const path = require('path');
 const fs = require('fs');
 
 const getAbsPath = (fileName) => path.join(__dirname, '../__fixtures__', fileName);
-
 const readFile = (fileName) => fs.readFileSync(getAbsPath(fileName), 'utf8');
-const result = readFile('expected.txt');
 
-test.each([['__fixtures__/before.json', '__fixtures__/after.json', result],
-  [getAbsPath('before.json'), '__fixtures__/after.json', result],
-  ['__fixtures__/before.yml', getAbsPath('after.yml'), result],
-  ['__fixtures__/before.yml', '__fixtures__/after.yml', result],
-  ['__fixtures__/before.ini', '__fixtures__/after.ini', result],
-  [getAbsPath('before.ini'), '__fixtures__/after.ini', result]])('defference expects to equal "expected"', (before, after, expected) => {
-  expect(genDiff(before, after)).toBe(expected);
+test.each([[getAbsPath('before.json'), '__fixtures__/after.json', readFile('expected.txt')],
+  ['__fixtures__/before.yml', getAbsPath('after.yml'), readFile('expected.txt')],
+  [getAbsPath('before.ini'), '__fixtures__/after.ini', readFile('expected.txt')]])('should equal "expected"', (before, after, expected) => {
+  expect(typeof genDiff(before, after)).toBe('string');
+  expect(genDiff(before, after)).toEqual(expected);
 });
 
 test('no such file or directory or error', () => {
@@ -25,5 +21,6 @@ test('no such file or directory or error', () => {
 
   expect(() => {
     genDiff(getAbsPath('before.json'));
+    genDiff(getAbsPath('before.json'), 'Hello');
   }).toThrowError();
 });
