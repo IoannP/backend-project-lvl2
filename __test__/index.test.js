@@ -6,11 +6,13 @@ const fs = require('fs');
 const getAbsPath = (fileName) => path.join(__dirname, '../__fixtures__', fileName);
 const readFile = (fileName) => fs.readFileSync(getAbsPath(fileName), 'utf8');
 
-test.each([[getAbsPath('before.json'), '__fixtures__/after.json', readFile('expected.txt')],
-  ['__fixtures__/before.yml', getAbsPath('after.yml'), readFile('expected.txt')],
-  [getAbsPath('before.ini'), '__fixtures__/after.ini', readFile('expected.txt')]])('should equal "expected"', (before, after, expected) => {
-  expect(typeof genDiff(before, after)).toBe('string');
-  expect(genDiff(before, after)).toEqual(expected);
+test.each([[getAbsPath('before.json'), '__fixtures__/after.json'],
+  ['__fixtures__/before.yml', getAbsPath('after.yml')],
+  [getAbsPath('before.ini'), '__fixtures__/after.ini']])('should equal', (before, after) => {
+  expect(typeof genDiff(before, after, 'detailed')).toBe('string');
+  expect(typeof genDiff(before, after, 'plain')).toBe('string');
+  expect(genDiff(before, after, 'detailed')).toEqual(readFile('detailed.txt'));
+  expect(genDiff(before, after, 'plain')).toEqual(readFile('plain.txt'));
 });
 
 test('no such file or directory or error', () => {

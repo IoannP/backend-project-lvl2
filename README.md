@@ -5,9 +5,13 @@
 
 ## Usage
 To compare files:
-* ```npx gendiff -h``` # to get help
-* ```npx gendiff -V``` # to get version
-* ```npx gendiff <first file> <second file>```  # to get difference
+* ```gendiff -h``` # to get help
+* ```gendiff -V``` # to get version
+* ```gendiff <first file> <second file>```  # to get difference in tree format (detailed)
+* ```gendiff -f plain <first file> <second file> ``` # to get difference in plain format
+
+##### plain format
+[![asciicast](https://asciinema.org/a/5ote56BPOdYAOoE5VKMX5PdhE.svg)](https://asciinema.org/a/5ote56BPOdYAOoE5VKMX5PdhE)
 
 ##### JSON files
 [![asciicast](https://asciinema.org/a/sTUxuqox67gxL3mDWy7jc0TrT.svg)](https://asciinema.org/a/sTUxuqox67gxL3mDWy7jc0TrT)

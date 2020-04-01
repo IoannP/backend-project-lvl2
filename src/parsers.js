@@ -2,13 +2,18 @@ const YAML = require('yaml');
 const path = require('path');
 const ini = require('ini');
 
-export default (filename) => {
-  const format = path.extname(filename);
+const fs = require('fs');
+
+const getData = (filePath) => fs.readFileSync(filePath, 'utf8');
+
+export default (filePath) => {
+  const format = path.extname(filePath);
+  const data = getData(filePath);
   if (format === '.json') {
-    return JSON.parse;
+    return JSON.parse(data);
   }
   if (format === '.ini') {
-    return ini.parse;
+    return ini.parse(data);
   }
-  return YAML.parse;
+  return YAML.parse(data);
 };
