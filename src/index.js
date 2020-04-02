@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import parse from './parsers';
-import formater from './formatters/index';
+import formatter from './formatters/index';
 
 const getTree = (objOne, objTwo) => {
   const keys = _.uniq([..._.keys(objOne), ..._.keys(objTwo)]).sort();
@@ -24,10 +24,11 @@ const getTree = (objOne, objTwo) => {
   }, []);
 };
 
-export default (pathOne, pathTwo, format) => {
-  const obj1 = parse(pathOne);
-  const obj2 = parse(pathTwo);
-  const tree = getTree(obj1, obj2);
-  const getFormater = formater(format);
-  return getFormater(tree);
+export default (pathOne, pathTwo, format = 'tree') => {
+  const fileData1 = parse(pathOne);
+  const fileData2 = parse(pathTwo);
+  if (!_.isObject(fileData1)) return fileData1;
+  if (!_.isObject(fileData2)) return fileData2;
+  const tree = getTree(fileData1, fileData2);
+  return formatter(tree, format);
 };
