@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import parse from './parsers';
 import formatter from './formatters/index';
@@ -24,11 +26,20 @@ const getTree = (objOne, objTwo) => {
   }, []);
 };
 
-export default (pathOne, pathTwo, format = 'tree') => {
-  const fileData1 = parse(pathOne);
-  const fileData2 = parse(pathTwo);
-  if (!_.isObject(fileData1)) return fileData1;
-  if (!_.isObject(fileData2)) return fileData2;
-  const tree = getTree(fileData1, fileData2);
-  return formatter(tree, format);
+export default (filePathOne, filePathTwo, format = 'tree') => {
+  const fileData1 = fs.readFileSync(filePathOne, 'utf8');
+  const fileData2 = fs.readFileSync(filePathTwo, 'utf8');
+
+  const fileExtension1 = path.extname(filePathOne);
+  const fileExtension2 = path.extname(filePathTwo);
+
+  try {
+    const parsedData1 = parse(fileExtension1, fileData1);
+    const parsedData2 = parse(fileExtension2, fileData2);
+
+    const tree = getTree(parsedData1, parsedData2);
+    return formatter(tree, format);
+  } catch (error) {
+    return `${error.name}:\n${error.message}`;
+  }
 };
