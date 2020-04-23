@@ -4,42 +4,49 @@ import _ from 'lodash';
 import parse from './parsers';
 import formatter from './formatters/index';
 
-const getTree = (objOne, objTwo) => {
-  const keys = _.uniq([..._.keys(objOne), ..._.keys(objTwo)]).sort();
-  return keys.reduce((acc, value) => {
-    if (_.has(objOne, value) && _.has(objTwo, value)) {
-      if (_.isObject(objOne[value]) && _.isObject(objTwo[value])) {
-        return [...acc, { name: value, children: getTree(objOne[value], objTwo[value]) }];
+const getTree = (object1, object2) => {
+  const keys = _.union([..._.keys(object1), ..._.keys(object2)]).sort();
+  return keys.map((key) => {
+    if (_.has(object1, key) && _.has(object2, key)) {
+      if (_.isObject(object1[key]) && _.isObject(object2[key])) {
+        return { name: key, children: getTree(object1[key], object2[key]) };
       }
-      if (objOne[value] === objTwo[value]) return [...acc, { name: value, state: 'unchanged', value: objTwo[value] }];
-      return [...acc, {
-        name: value,
+      if (object1[key] === object2[key]) return { name: key, state: 'unchanged', value: object2[key] };
+      return {
+        name: key,
         state: 'changed',
-        value: objOne[value],
-        changedValue: objTwo[value],
-      }];
+        value: object1[key],
+        changedValue: object2[key],
+      };
     }
-    if (_.has(objTwo, value)) {
-      return [...acc, { name: value, state: 'added', value: objTwo[value] }];
+    if (_.has(object2, key)) {
+      return { name: key, state: 'added', value: object2[key] };
     }
-    return [...acc, { name: value, state: 'deleted', value: objOne[value] }];
-  }, []);
+    return { name: key, state: 'deleted', value: object1[key] };
+  });
 };
 
-export default (filePathOne, filePathTwo, format = 'tree') => {
-  const fileData1 = fs.readFileSync(filePathOne, 'utf8');
-  const fileData2 = fs.readFileSync(filePathTwo, 'utf8');
+export default (filePath1, filePath2, format = 'tree') => {
+  const data1 = fs.readFileSync(filePath1, 'utf8');
+  const data2 = fs.readFileSync(filePath2, 'utf8');
 
-  const fileExtension1 = path.extname(filePathOne);
-  const fileExtension2 = path.extname(filePathTwo);
+  const formatData1 = path.extname(filePath1);
+  const formatData2 = path.extname(filePath2);
 
-  try {
-    const parsedData1 = parse(fileExtension1, fileData1);
-    const parsedData2 = parse(fileExtension2, fileData2);
+  const parsedData1 = parse(formatData1, data1);
+  const parsedData2 = parse(formatData2, data2);
 
-    const tree = getTree(parsedData1, parsedData2);
-    return formatter(tree, format);
-  } catch (error) {
-    return `${error.name}:\n${error.message}`;
+  if (parsedData1 === formatData1) {
+    throw new TypeError(`The data format '${formatData1}' in location '${filePath1}' is not correct. Please compare followingdata formats 'JSON', 'YAML', 'INI'`);
   }
+  if (parsedData2 === formatData2) {
+    throw new TypeError(`The data format '${formatData2}' in location '${filePath2}' is not correct. Please compare followingdata formats 'JSON', 'YAML', 'INI'`);
+  }
+
+  const tree = getTree(parsedData1, parsedData2);
+  const result = formatter(format, tree);
+  if (result === format) {
+    throw new TypeError(`The format '${format}' is not correct! The correct formats are 'plain', 'json', 'tree'. The defaultformat is 'tree'.`);
+  }
+  return result;
 };
