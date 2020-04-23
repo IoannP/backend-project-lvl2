@@ -37,10 +37,10 @@ export default (filePath1, filePath2, format = 'tree') => {
   const parsedData2 = parse(formatData2, data2);
 
   if (parsedData1 === formatData1) {
-    throw new TypeError(`The data format '${formatData1}' in location '${filePath1}' is not correct. Please compare followingdata formats 'JSON', 'YAML', 'INI'`);
+    throw new TypeError(`The data format '${formatData1}' in location '${filePath1}' is not correct. Please compare following data formats 'JSON', 'YAML', 'INI'`);
   }
   if (parsedData2 === formatData2) {
-    throw new TypeError(`The data format '${formatData2}' in location '${filePath2}' is not correct. Please compare followingdata formats 'JSON', 'YAML', 'INI'`);
+    throw new TypeError(`The data format '${formatData2}' in location '${filePath2}' is not correct. Please compare following data formats 'JSON', 'YAML', 'INI'`);
   }
 
   const tree = getTree(parsedData1, parsedData2);
