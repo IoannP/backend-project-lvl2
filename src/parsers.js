@@ -3,13 +3,13 @@ import ini from 'ini';
 
 export default (formatData, data) => {
   switch (formatData) {
-    case '.ini':
+    case 'INI':
       return ini.parse(data);
-    case '.yml' || '.yaml':
+    case 'YML' || 'YAML':
       return YAML.parse(data);
-    case '.json':
+    case 'JSON':
       return JSON.parse(data);
     default:
-      return formatData;
+      throw new TypeError(`The data format '${formatData}' is not correct. Please compare following data formats 'JSON', 'YAML', 'INI'`);
   }
 };

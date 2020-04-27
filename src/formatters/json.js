@@ -1,6 +1,19 @@
-const json = (array) => {
-  const result = array.reduce((acc, { name, ...rest }) => ({ ...acc, [name]: rest }), {});
-  return JSON.stringify(result);
-};
+const makeTree = (array) => array
+  .reduce((acc, {
+    name,
+    state,
+    children,
+    value,
+    currentValue,
+    changedValue,
+  }) => {
+    if (children) {
+      return { ...acc, [name]: makeTree(children) };
+    }
+    if (state === 'changed') {
+      return { ...acc, [name]: { state, changedValue, currentValue } };
+    }
+    return { ...acc, [name]: { state, value } };
+  }, {});
 
-export default json;
+export default (array) => JSON.stringify(makeTree(array), null, 2);

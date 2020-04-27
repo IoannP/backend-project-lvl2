@@ -4,7 +4,7 @@ import genDiff from '../index';
 import { version, description } from '../../package.json';
 
 program
-  .version(version, '-V, --vers', 'output the version number')
+  .version(version, '-V, --version', 'output the version number')
   .description(description)
   .option('-f, --format [type]', 'output format', 'tree')
   .arguments('<firstConfig> <secondConfig>')

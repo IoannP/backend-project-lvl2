@@ -2,32 +2,29 @@ import _ from 'lodash';
 
 const stringify = (value) => {
   if (!_.isObject(value)) return JSON.stringify(value).replace(/"/g, "'");
-  const getPairs = _.entries(value);
-  return `'{ ${getPairs.map((pair) => pair.join(': ')).join(', ')} }'`;
+  return JSON.stringify(value, null, '  ').replace(/"/g, '');
 };
 
-const plain = (arr, parent = '') => arr
-  .reduce((acc, {
+const plain = (array, parent = '') => array
+  .map(({
     name,
     state,
     value,
+    currentValue,
     changedValue,
     children,
   }) => {
     if (children) {
-      return [...acc, plain(children, `${parent}${name}.`)];
+      return plain(children, `${parent}${name}.`);
     }
     if (state === 'changed') {
-      return [...acc, `Property '${parent}${name}' was changed from ${stringify(value)} to ${stringify(changedValue)}`];
+      return `Property '${parent}${name}' was changed from ${stringify(changedValue)} to ${stringify(currentValue)}`;
     }
     if (state === 'deleted') {
-      return [...acc, `Property '${parent}${name}' was deleted`];
+      return `Property '${parent}${name}' was deleted`;
     }
-    if (state === 'added') {
-      return [...acc, `Property '${parent}${name}' was added with value: ${stringify(value)}`];
-    }
-    return acc;
-  }, [])
+    return `Property '${parent}${name}' was added with value: ${stringify(value)}`;
+  })
   .join('\n');
 
 export default plain;

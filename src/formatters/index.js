@@ -11,6 +11,6 @@ export default (format, data) => {
     case 'json':
       return json(data);
     default:
-      return format;
+      throw new TypeError(`The format '${format}' is not correct! The correct formats are 'plain', 'json', 'tree'. The defaultformat is 'tree'.`);
   }
 };

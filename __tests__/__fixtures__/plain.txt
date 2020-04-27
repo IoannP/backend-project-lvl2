@@ -8,8 +8,19 @@ Property 'children.John.died' was deleted
 Property 'children.John.middle' was changed from 'Fitzgerald' to 'Bouvier Kennedy'
 Property 'children.John.surname' was changed from 'Kennedy' to 'Schlossberg'
 Property 'children.Patrick' was deleted
-Property 'children.Rose' was added with value: '{ name: Rose, surname: Schlossberg, middle: Kennedy, born: 1988, age: 31 }'
-Property 'children.Tatiana' was added with value: '{ name: Tatiana, surname: Schlossberg, middle: Kennedy, born: 1990, age: 29 }'
+Property 'children.Rose' was added with value: {
+  surname: Schlossberg,
+  middle: Kennedy,
+  born: 1988,
+  age: 31
+}
+Property 'children.Tatiana' was added with value: {
+  surname: Schlossberg,
+  middle: Kennedy,
+  born: 1990,
+  age: 29
+}
 Property 'died' was deleted
 Property 'middle' was changed from 'Fitzgerald' to 'Bouvier'
 Property 'name' was changed from 'John' to 'Caroline'
+Property 'surname' was added with value: 'Kennedy'

@@ -1,1 +1,99 @@
-{"age":{"state":"changed","value":46,"changedValue":62},"born":{"state":"changed","value":1917,"changedValue":1957},"children":{"children":[{"name":"Arabella","state":"deleted","value":"no information"},{"name":"Caroline","state":"deleted","value":{"name":"Caroline","surname":"Kennedy","middle":"Bouvier","born":1957,"age":62}},{"name":"John","children":[{"name":"age","state":"changed","value":38,"changedValue":27},{"name":"born","state":"changed","value":1960,"changedValue":1993},{"name":"died","state":"deleted","value":{"year":1999,"cause":"plane crash"}},{"name":"middle","state":"changed","value":"Fitzgerald","changedValue":"Bouvier Kennedy"},{"name":"name","state":"unchanged","value":"John"},{"name":"surname","state":"changed","value":"Kennedy","changedValue":"Schlossberg"}]},{"name":"Patrick","state":"deleted","value":"no information"},{"name":"Rose","state":"added","value":{"name":"Rose","surname":"Schlossberg","middle":"Kennedy","born":1988,"age":31}},{"name":"Tatiana","state":"added","value":{"name":"Tatiana","surname":"Schlossberg","middle":"Kennedy","born":1990,"age":29}}]},"died":{"state":"deleted","value":{"year":1963,"cause":"assassination"}},"middle":{"state":"changed","value":"Fitzgerald","changedValue":"Bouvier"},"name":{"state":"changed","value":"John","changedValue":"Caroline"},"surname":{"state":"unchanged","value":"Kennedy"}}
+{
+  "age": {
+    "state": "changed",
+    "changedValue": 46,
+    "currentValue": 62
+  },
+  "born": {
+    "state": "changed",
+    "changedValue": 1917,
+    "currentValue": 1957
+  },
+  "children": {
+    "Arabella": {
+      "state": "deleted",
+      "value": "no information"
+    },
+    "Caroline": {
+      "state": "deleted",
+      "value": {
+        "surname": "Kennedy",
+        "middle": "Bouvier",
+        "born": 1957,
+        "age": 62
+      }
+    },
+    "John": {
+      "age": {
+        "state": "changed",
+        "changedValue": 38,
+        "currentValue": 27
+      },
+      "born": {
+        "state": "changed",
+        "changedValue": 1960,
+        "currentValue": 1993
+      },
+      "died": {
+        "state": "deleted",
+        "value": {
+          "year": 1999,
+          "cause": "plane crash"
+        }
+      },
+      "middle": {
+        "state": "changed",
+        "changedValue": "Fitzgerald",
+        "currentValue": "Bouvier Kennedy"
+      },
+      "surname": {
+        "state": "changed",
+        "changedValue": "Kennedy",
+        "currentValue": "Schlossberg"
+      }
+    },
+    "Patrick": {
+      "state": "deleted",
+      "value": "no information"
+    },
+    "Rose": {
+      "state": "added",
+      "value": {
+        "surname": "Schlossberg",
+        "middle": "Kennedy",
+        "born": 1988,
+        "age": 31
+      }
+    },
+    "Tatiana": {
+      "state": "added",
+      "value": {
+        "surname": "Schlossberg",
+        "middle": "Kennedy",
+        "born": 1990,
+        "age": 29
+      }
+    }
+  },
+  "died": {
+    "state": "deleted",
+    "value": {
+      "year": 1963,
+      "cause": "assassination"
+    }
+  },
+  "middle": {
+    "state": "changed",
+    "changedValue": "Fitzgerald",
+    "currentValue": "Bouvier"
+  },
+  "name": {
+    "state": "changed",
+    "changedValue": "John",
+    "currentValue": "Caroline"
+  },
+  "surname": {
+    "state": "unchanged",
+    "value": "Kennedy"
+  }
+}

@@ -15,8 +15,8 @@ const getTree = (object1, object2) => {
       return {
         name: key,
         state: 'changed',
-        value: object1[key],
-        changedValue: object2[key],
+        changedValue: object1[key],
+        currentValue: object2[key],
       };
     }
     if (_.has(object2, key)) {
@@ -26,27 +26,26 @@ const getTree = (object1, object2) => {
   });
 };
 
-export default (filePath1, filePath2, format = 'tree') => {
-  const data1 = fs.readFileSync(filePath1, 'utf8');
-  const data2 = fs.readFileSync(filePath2, 'utf8');
+const getFormatData = (filePath) => path.extname(filePath)
+  .slice(1)
+  .toUpperCase();
 
-  const formatData1 = path.extname(filePath1);
-  const formatData2 = path.extname(filePath2);
+const getData = (filePath) => {
+  const absolutePath = path.resolve(process.cwd(), filePath);
+  const data = fs.readFileSync(absolutePath, 'utf8');
+  return data;
+};
+
+export default (filePath1, filePath2, format = 'tree') => {
+  const data1 = getData(filePath1);
+  const data2 = getData(filePath2);
+
+  const formatData1 = getFormatData(filePath1);
+  const formatData2 = getFormatData(filePath2);
 
   const parsedData1 = parse(formatData1, data1);
   const parsedData2 = parse(formatData2, data2);
 
-  if (parsedData1 === formatData1) {
-    throw new TypeError(`The data format '${formatData1}' in location '${filePath1}' is not correct. Please compare following data formats 'JSON', 'YAML', 'INI'`);
-  }
-  if (parsedData2 === formatData2) {
-    throw new TypeError(`The data format '${formatData2}' in location '${filePath2}' is not correct. Please compare following data formats 'JSON', 'YAML', 'INI'`);
-  }
-
   const tree = getTree(parsedData1, parsedData2);
-  const result = formatter(format, tree);
-  if (result === format) {
-    throw new TypeError(`The format '${format}' is not correct! The correct formats are 'plain', 'json', 'tree'. The defaultformat is 'tree'.`);
-  }
-  return result;
+  return formatter(format, tree);
 };
