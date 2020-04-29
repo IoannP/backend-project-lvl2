@@ -23,4 +23,3 @@ Property 'children.Tatiana' was added with value: {
 Property 'died' was deleted
 Property 'middle' was changed from 'Fitzgerald' to 'Bouvier'
 Property 'name' was changed from 'John' to 'Caroline'
-Property 'surname' was added with value: 'Kennedy'

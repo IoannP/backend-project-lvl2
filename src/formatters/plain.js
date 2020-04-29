@@ -5,26 +5,28 @@ const stringify = (value) => {
   return JSON.stringify(value, null, '  ').replace(/"/g, '');
 };
 
-const plain = (array, parent = '') => array
+const plainFormat = (nodes, parent = '') => nodes
   .map(({
     name,
-    state,
+    type,
     value,
     currentValue,
     changedValue,
     children,
   }) => {
-    if (children) {
-      return plain(children, `${parent}${name}.`);
+    switch (type) {
+      case 'added':
+        return `Property '${parent}${name}' was added with value: ${stringify(value)}`;
+      case 'deleted':
+        return `Property '${parent}${name}' was deleted`;
+      case 'changed':
+        return `Property '${parent}${name}' was changed from ${stringify(changedValue)} to ${stringify(currentValue)}`;
+      case 'unchanged':
+        return '';
+      default:
+        return plainFormat(children, `${parent}${name}.`);
     }
-    if (state === 'changed') {
-      return `Property '${parent}${name}' was changed from ${stringify(changedValue)} to ${stringify(currentValue)}`;
-    }
-    if (state === 'deleted') {
-      return `Property '${parent}${name}' was deleted`;
-    }
-    return `Property '${parent}${name}' was added with value: ${stringify(value)}`;
   })
   .join('\n');
 
-export default plain;
+export default plainFormat;

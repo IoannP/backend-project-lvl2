@@ -1,51 +1,51 @@
 {
-    - age: 46,
-    + age: 62,
-    - born: 1917,
-    + born: 1957,
-      children: {
-        - Arabella: no information,
-        - Caroline: {
-            surname: Kennedy,
-            middle: Bouvier,
-            born: 1957,
-            age: 62
-        },
-          John: {
-            - age: 38,
-            + age: 27,
-            - born: 1960,
-            + born: 1993,
-            - died: {
-                year: 1999,
-                cause: plane crash
-            },
-            - middle: Fitzgerald,
-            + middle: Bouvier Kennedy,
-            - surname: Kennedy,
-            + surname: Schlossberg
-        },
-        - Patrick: no information,
-        + Rose: {
-            surname: Schlossberg,
-            middle: Kennedy,
-            born: 1988,
-            age: 31
-        },
-        + Tatiana: {
-            surname: Schlossberg,
-            middle: Kennedy,
-            born: 1990,
-            age: 29
+  - age: 46
+  + age: 62
+  - born: 1917
+  + born: 1957
+    children: {
+      - Arabella: no information
+      - Caroline: {
+          surname: Kennedy
+          middle: Bouvier
+          born: 1957
+          age: 62
         }
-    },
-    - died: {
-        year: 1963,
-        cause: assassination
-    },
-    - middle: Fitzgerald,
-    + middle: Bouvier,
-    - name: John,
-    + name: Caroline,
-      surname: Kennedy
+        John: {
+          - age: 38
+          + age: 27
+          - born: 1960
+          + born: 1993
+          - died: {
+              year: 1999
+              cause: plane crash
+            }
+          - middle: Fitzgerald
+          + middle: Bouvier Kennedy
+          - surname: Kennedy
+          + surname: Schlossberg
+        }
+      - Patrick: no information
+      + Rose: {
+          surname: Schlossberg
+          middle: Kennedy
+          born: 1988
+          age: 31
+        }
+      + Tatiana: {
+          surname: Schlossberg
+          middle: Kennedy
+          born: 1990
+          age: 29
+        }
+    }
+  - died: {
+      year: 1963
+      cause: assassination
+    }
+  - middle: Fitzgerald
+  + middle: Bouvier
+  - name: John
+  + name: Caroline
+    surname: Kennedy
 }

@@ -5,30 +5,28 @@ import parse from './parsers';
 import formatter from './formatters/index';
 
 const makeTree = (object1, object2) => {
-  const keys = _.union([..._.keys(object1), ..._.keys(object2)]).sort();
+  const keys = _.union(_.keys(object1), _.keys(object2)).sort();
   return keys.map((key) => {
-    if (_.has(object1, key) && _.has(object2, key)) {
-      if (_.isObject(object1[key]) && _.isObject(object2[key])) {
-        return { name: key, children: makeTree(object1[key], object2[key]) };
-      }
-      if (object1[key] === object2[key]) return { name: key, state: 'unchanged', value: object2[key] };
+    const value1 = object1[key];
+    const value2 = object2[key];
+    if (!value1) return { name: key, type: 'added', value: value2 };
+    if (!value2) return { name: key, type: 'deleted', value: value1 };
+    if (_.isObject(value1) && _.isObject(value2)) {
+      return { name: key, children: makeTree(value1, value2) };
+    }
+    if (value1 !== value2) {
       return {
         name: key,
-        state: 'changed',
-        changedValue: object1[key],
-        currentValue: object2[key],
+        type: 'changed',
+        changedValue: value1,
+        currentValue: value2,
       };
     }
-    if (_.has(object2, key)) {
-      return { name: key, state: 'added', value: object2[key] };
-    }
-    return { name: key, state: 'deleted', value: object1[key] };
+    return { name: key, type: 'unchanged', value: value2 };
   });
 };
 
-const getFormatData = (filePath) => path.extname(filePath)
-  .slice(1)
-  .toUpperCase();
+const getFormatData = (filePath) => path.extname(filePath).slice(1);
 
 const getData = (filePath) => {
   const absolutePath = path.resolve(process.cwd(), filePath);

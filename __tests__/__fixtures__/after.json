@@ -6,23 +6,23 @@
   "age":62,
   "children":{
 	  "Rose":{
-	     "surname":"Schlossberg",
-	     "middle":"Kennedy",
-	     "born":1988,
-	     "age":31
+	    "surname":"Schlossberg",
+	    "middle":"Kennedy",
+	    "born":1988,
+	    "age":31
 	  },
 	  "Tatiana":{
-	     "surname":"Schlossberg",
-	     "middle":"Kennedy",
-	     "born":1990,
-	     "age":29
+	    "surname":"Schlossberg",
+	    "middle":"Kennedy",
+	    "born":1990,
+	    "age":29
 	  },
 	  "John":{
-	     "surname":"Schlossberg",
-	     "middle":"Bouvier Kennedy",
-	     "born":1993,
-	     "age":27
+	    "surname":"Schlossberg",
+	    "middle":"Bouvier Kennedy",
+	    "born":1993,
+	    "age":27
 	  }
-    }
+  }
 }
 

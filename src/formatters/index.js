@@ -1,15 +1,15 @@
-import tree from './tree';
-import plain from './plain';
-import json from './json';
+import treeFormatter from './tree';
+import plainFormatter from './plain';
+import jsonFormatter from './json';
 
 export default (format, data) => {
   switch (format) {
     case 'plain':
-      return plain(data);
+      return plainFormatter(data);
     case 'tree':
-      return tree(data);
+      return treeFormatter(data);
     case 'json':
-      return json(data);
+      return jsonFormatter(data);
     default:
       throw new TypeError(`The format '${format}' is not correct! The correct formats are 'plain', 'json', 'tree'. The defaultformat is 'tree'.`);
   }

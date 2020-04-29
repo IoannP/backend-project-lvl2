@@ -1,99 +1,121 @@
-{
-  "age": {
-    "state": "changed",
+[
+  {
+    "name": "age",
+    "type": "changed",
     "changedValue": 46,
     "currentValue": 62
   },
-  "born": {
-    "state": "changed",
+  {
+    "name": "born",
+    "type": "changed",
     "changedValue": 1917,
     "currentValue": 1957
   },
-  "children": {
-    "Arabella": {
-      "state": "deleted",
-      "value": "no information"
-    },
-    "Caroline": {
-      "state": "deleted",
-      "value": {
-        "surname": "Kennedy",
-        "middle": "Bouvier",
-        "born": 1957,
-        "age": 62
-      }
-    },
-    "John": {
-      "age": {
-        "state": "changed",
-        "changedValue": 38,
-        "currentValue": 27
+  {
+    "name": "children",
+    "children": [
+      {
+        "name": "Arabella",
+        "type": "deleted",
+        "value": "no information"
       },
-      "born": {
-        "state": "changed",
-        "changedValue": 1960,
-        "currentValue": 1993
-      },
-      "died": {
-        "state": "deleted",
+      {
+        "name": "Caroline",
+        "type": "deleted",
         "value": {
-          "year": 1999,
-          "cause": "plane crash"
+          "surname": "Kennedy",
+          "middle": "Bouvier",
+          "born": 1957,
+          "age": 62
         }
       },
-      "middle": {
-        "state": "changed",
-        "changedValue": "Fitzgerald",
-        "currentValue": "Bouvier Kennedy"
+      {
+        "name": "John",
+        "children": [
+          {
+            "name": "age",
+            "type": "changed",
+            "changedValue": 38,
+            "currentValue": 27
+          },
+          {
+            "name": "born",
+            "type": "changed",
+            "changedValue": 1960,
+            "currentValue": 1993
+          },
+          {
+            "name": "died",
+            "type": "deleted",
+            "value": {
+              "year": 1999,
+              "cause": "plane crash"
+            }
+          },
+          {
+            "name": "middle",
+            "type": "changed",
+            "changedValue": "Fitzgerald",
+            "currentValue": "Bouvier Kennedy"
+          },
+          {
+            "name": "surname",
+            "type": "changed",
+            "changedValue": "Kennedy",
+            "currentValue": "Schlossberg"
+          }
+        ]
       },
-      "surname": {
-        "state": "changed",
-        "changedValue": "Kennedy",
-        "currentValue": "Schlossberg"
+      {
+        "name": "Patrick",
+        "type": "deleted",
+        "value": "no information"
+      },
+      {
+        "name": "Rose",
+        "type": "added",
+        "value": {
+          "surname": "Schlossberg",
+          "middle": "Kennedy",
+          "born": 1988,
+          "age": 31
+        }
+      },
+      {
+        "name": "Tatiana",
+        "type": "added",
+        "value": {
+          "surname": "Schlossberg",
+          "middle": "Kennedy",
+          "born": 1990,
+          "age": 29
+        }
       }
-    },
-    "Patrick": {
-      "state": "deleted",
-      "value": "no information"
-    },
-    "Rose": {
-      "state": "added",
-      "value": {
-        "surname": "Schlossberg",
-        "middle": "Kennedy",
-        "born": 1988,
-        "age": 31
-      }
-    },
-    "Tatiana": {
-      "state": "added",
-      "value": {
-        "surname": "Schlossberg",
-        "middle": "Kennedy",
-        "born": 1990,
-        "age": 29
-      }
-    }
+    ]
   },
-  "died": {
-    "state": "deleted",
+  {
+    "name": "died",
+    "type": "deleted",
     "value": {
       "year": 1963,
       "cause": "assassination"
     }
   },
-  "middle": {
-    "state": "changed",
+  {
+    "name": "middle",
+    "type": "changed",
     "changedValue": "Fitzgerald",
     "currentValue": "Bouvier"
   },
-  "name": {
-    "state": "changed",
+  {
+    "name": "name",
+    "type": "changed",
     "changedValue": "John",
     "currentValue": "Caroline"
   },
-  "surname": {
-    "state": "unchanged",
+  {
+    "name": "surname",
+    "type": "unchanged",
     "value": "Kennedy"
   }
-}
+]
