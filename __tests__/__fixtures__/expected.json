@@ -2,17 +2,18 @@
   {
     "name": "age",
     "type": "changed",
-    "changedValue": 46,
+    "previousValue": 46,
     "currentValue": 62
   },
   {
     "name": "born",
     "type": "changed",
-    "changedValue": 1917,
+    "previousValue": 1917,
     "currentValue": 1957
   },
   {
     "name": "children",
+    "type": "parent",
     "children": [
       {
         "name": "Arabella",
@@ -31,17 +32,18 @@
       },
       {
         "name": "John",
+        "type": "parent",
         "children": [
           {
             "name": "age",
             "type": "changed",
-            "changedValue": 38,
+            "previousValue": 38,
             "currentValue": 27
           },
           {
             "name": "born",
             "type": "changed",
-            "changedValue": 1960,
+            "previousValue": 1960,
             "currentValue": 1993
           },
           {
@@ -55,13 +57,13 @@
           {
             "name": "middle",
             "type": "changed",
-            "changedValue": "Fitzgerald",
+            "previousValue": "Fitzgerald",
             "currentValue": "Bouvier Kennedy"
           },
           {
             "name": "surname",
             "type": "changed",
-            "changedValue": "Kennedy",
+            "previousValue": "Kennedy",
             "currentValue": "Schlossberg"
           }
         ]
@@ -104,13 +106,13 @@
   {
     "name": "middle",
     "type": "changed",
-    "changedValue": "Fitzgerald",
+    "previousValue": "Fitzgerald",
     "currentValue": "Bouvier"
   },
   {
     "name": "name",
     "type": "changed",
-    "changedValue": "John",
+    "previousValue": "John",
     "currentValue": "Caroline"
   },
   {

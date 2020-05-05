@@ -1,17 +1,25 @@
 import _ from 'lodash';
 
-const stringify = (value) => {
-  if (!_.isObject(value)) return JSON.stringify(value).replace(/"/g, "'");
-  return JSON.stringify(value, null, '  ').replace(/"/g, '');
+const getPad = (num) => '  '.repeat(num);
+
+const stringify = (data, depth = 0) => {
+  if (_.isString(data)) return `'${data}'`;
+  if (_.isArray(data)) return `[${data}]`;
+  if (_.isObject(data)) {
+    return `{\n${_.entries(data)
+      .map(([key, value]) => (`${getPad(depth + 1)}${key}: ${stringify(value, depth + 1)}`))
+      .join('\n')}\n${getPad(depth)}}`;
+  }
+  return data;
 };
 
 const plainFormat = (nodes, parent = '') => nodes
   .map(({
     name,
     type,
-    value,
+    previousValue,
     currentValue,
-    changedValue,
+    value,
     children,
   }) => {
     switch (type) {
@@ -20,11 +28,13 @@ const plainFormat = (nodes, parent = '') => nodes
       case 'deleted':
         return `Property '${parent}${name}' was deleted`;
       case 'changed':
-        return `Property '${parent}${name}' was changed from ${stringify(changedValue)} to ${stringify(currentValue)}`;
+        return `Property '${parent}${name}' was changed from ${stringify(previousValue)} to ${stringify(currentValue)}`;
       case 'unchanged':
-        return '';
-      default:
+        return null;
+      case 'parent':
         return plainFormat(children, `${parent}${name}.`);
+      default:
+        throw new Error(`Something went wrong. The type ${type} does not exist.`);
     }
   })
   .join('\n');

@@ -6,10 +6,10 @@
     children: {
       - Arabella: no information
       - Caroline: {
-          surname: Kennedy
-          middle: Bouvier
-          born: 1957
-          age: 62
+            surname: Kennedy
+            middle: Bouvier
+            born: 1957
+            age: 62
         }
         John: {
           - age: 38
@@ -17,8 +17,8 @@
           - born: 1960
           + born: 1993
           - died: {
-              year: 1999
-              cause: plane crash
+                year: 1999
+                cause: plane crash
             }
           - middle: Fitzgerald
           + middle: Bouvier Kennedy
@@ -27,21 +27,21 @@
         }
       - Patrick: no information
       + Rose: {
-          surname: Schlossberg
-          middle: Kennedy
-          born: 1988
-          age: 31
+            surname: Schlossberg
+            middle: Kennedy
+            born: 1988
+            age: 31
         }
       + Tatiana: {
-          surname: Schlossberg
-          middle: Kennedy
-          born: 1990
-          age: 29
+            surname: Schlossberg
+            middle: Kennedy
+            born: 1990
+            age: 29
         }
     }
   - died: {
-      year: 1963
-      cause: assassination
+        year: 1963
+        cause: assassination
     }
   - middle: Fitzgerald
   + middle: Bouvier

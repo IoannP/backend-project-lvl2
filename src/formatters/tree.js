@@ -1,41 +1,45 @@
 import _ from 'lodash';
 
-const getPads = (num) => _.repeat(' ', num);
+const getPad = (num) => _.repeat('  ', num);
 
-const stringify = (data, pads) => {
-  if (!_.isObject(data)) {
-    return data;
+const stringify = (data, depth) => {
+  if (_.isArray(data)) return `[${data}]`;
+  if (_.isObject(data)) {
+    const padStart = getPad(depth * 2 + 1);
+    const padEnd = getPad(depth * 2);
+    const objectStringified = _.entries(data)
+      .map(([key, value]) => (_.isObject(value)
+        ? `${padStart}  ${key}: ${stringify(value, depth + 1)}`
+        : `${padStart}  ${key}: ${value}`));
+    return `{\n${objectStringified.join('\n')}\n${padEnd}}`;
   }
-  const objectStringified = _.entries(data)
-    .map(([key, value]) => (_.isObject(value)
-      ? `${getPads(pads + 4)}${key}: ${stringify(value, pads + 2)}`
-      : `${getPads(pads + 4)}${key}: ${value}`));
-  return `{\n${objectStringified.join('\n')}\n${getPads(pads + 2)}}`;
+  return data;
 };
 
-const treeFormat = (nodes, pads = 2) => {
-  const tree = nodes.map(({
-    name,
-    type,
-    value,
-    currentValue,
-    changedValue,
-    children,
-  }) => {
-    switch (type) {
-      case 'added':
-        return `${getPads(pads)}+ ${name}: ${stringify(value, pads)}`;
-      case 'deleted':
-        return `${getPads(pads)}- ${name}: ${stringify(value, pads)}`;
-      case 'unchanged':
-        return `${getPads(pads)}  ${name}: ${stringify(value, pads)}`;
-      case 'changed':
-        return `${getPads(pads)}- ${name}: ${stringify(changedValue, pads)}\n${getPads(pads)}+ ${name}: ${stringify(currentValue, pads)}`;
-      default:
-        return `${getPads(pads)}  ${name}: ${treeFormat(children, pads + 4)}`;
-    }
-  });
-  return `{\n${tree.join('\n')}\n${getPads(pads - 2)}}`;
-};
+const treeFormat = (nodes, depth = 1) => nodes.map(({
+  name,
+  type,
+  value,
+  previousValue,
+  currentValue,
+  children,
+}) => {
+  const padStart = depth > 1 ? getPad(depth * 2 - 1) : getPad(depth);
+  const padEnd = getPad(depth * 2);
+  switch (type) {
+    case 'added':
+      return `${padStart}+ ${name}: ${stringify(value, depth)}`;
+    case 'deleted':
+      return `${padStart}- ${name}: ${stringify(value, depth)}`;
+    case 'unchanged':
+      return `${padStart}  ${name}: ${stringify(value, depth)}`;
+    case 'changed':
+      return `${padStart}- ${name}: ${stringify(previousValue, depth)}\n${padStart}+ ${name}: ${stringify(currentValue, depth)}`;
+    case 'parent':
+      return `${padStart}  ${name}: {\n${treeFormat(children, depth + 1)}\n${padEnd}}`;
+    default:
+      throw new Error(`Something went wrong. The type ${type} does not exist.`);
+  }
+}).join('\n');
 
-export default treeFormat;
+export default (data) => `{\n${treeFormat(data)}\n}`;

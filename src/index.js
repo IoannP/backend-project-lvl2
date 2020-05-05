@@ -9,20 +9,18 @@ const makeTree = (object1, object2) => {
   return keys.map((key) => {
     const value1 = object1[key];
     const value2 = object2[key];
-    if (!value1) return { name: key, type: 'added', value: value2 };
-    if (!value2) return { name: key, type: 'deleted', value: value1 };
+    if (!_.has(object1, key)) return { name: key, type: 'added', value: value2 };
+    if (!_.has(object2, key)) return { name: key, type: 'deleted', value: value1 };
+    if (_.isEqual(value1, value2)) return { name: key, type: 'unchanged', value: value2 };
     if (_.isObject(value1) && _.isObject(value2)) {
-      return { name: key, children: makeTree(value1, value2) };
+      return { name: key, type: 'parent', children: makeTree(value1, value2) };
     }
-    if (value1 !== value2) {
-      return {
-        name: key,
-        type: 'changed',
-        changedValue: value1,
-        currentValue: value2,
-      };
-    }
-    return { name: key, type: 'unchanged', value: value2 };
+    return {
+      name: key,
+      type: 'changed',
+      previousValue: value1,
+      currentValue: value2,
+    };
   });
 };
 
