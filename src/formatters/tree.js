@@ -4,16 +4,14 @@ const getPad = (num) => _.repeat('  ', num);
 
 const stringify = (data, depth) => {
   if (_.isArray(data)) return `[${data}]`;
-  if (_.isObject(data)) {
-    const padStart = getPad(depth * 2 + 1);
-    const padEnd = getPad(depth * 2);
-    const objectStringified = _.entries(data)
-      .map(([key, value]) => (_.isObject(value)
-        ? `${padStart}  ${key}: ${stringify(value, depth + 1)}`
-        : `${padStart}  ${key}: ${value}`));
-    return `{\n${objectStringified.join('\n')}\n${padEnd}}`;
-  }
-  return data;
+  if (!_.isObject(data)) return data;
+  const padStart = getPad(depth * 2 + 1);
+  const padEnd = getPad(depth * 2);
+  const objectStringified = _.entries(data)
+    .map(([key, value]) => (_.isObject(value)
+      ? `${padStart}  ${key}: ${stringify(value, depth + 1)}`
+      : `${padStart}  ${key}: ${value}`));
+  return `{\n${objectStringified.join('\n')}\n${padEnd}}`;
 };
 
 const treeFormat = (nodes, depth = 1) => nodes.map(({
